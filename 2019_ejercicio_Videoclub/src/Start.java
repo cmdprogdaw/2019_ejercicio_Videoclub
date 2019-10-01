@@ -27,11 +27,15 @@ public class Start {
 		pelicula4.setAño(2013);
 		
 		
-		HashMap<Integer, Pelicula> datos = new HashMap<Integer, Pelicula>();
+		HashMap<String, Pelicula> datos = new HashMap<String, Pelicula>();
 		
-		datos.put(pelicula1.getAño(), pelicula1);
+		datos.put(pelicula1.getTitulo(), pelicula1);
+		datos.put(pelicula2.getTitulo(), pelicula2);
+		datos.put(pelicula3.getTitulo(), pelicula3);
+		datos.put(pelicula4.getTitulo(), pelicula4);
 		
-		System.out.println(datos);
+		ImpresionMapa imprimir = new ImpresionMapa();
+		imprimir.imprimirMapa(datos);
 
 	}
 
