@@ -8,7 +8,7 @@ import com.cris.mapsPeliculas.beans.Pelicula;
 public class PeliculasConsola {
 	
 	/**
-	 * Recibe un iterador de peliculas, lo recorre, saca la pelicla y la imprime
+	 * Recibe un iterador de peliculas, lo recorre, saca la pelicula y la imprime
 	 * @param datos
 	 */
 	public static void imprimir(Iterator<Pelicula> datos) {

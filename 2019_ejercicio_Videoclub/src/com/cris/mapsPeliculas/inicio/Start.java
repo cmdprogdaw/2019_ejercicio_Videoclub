@@ -2,6 +2,8 @@ package com.cris.mapsPeliculas.inicio;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import com.cris.mapsPeliculas.beans.Director;
 import com.cris.mapsPeliculas.beans.Pelicula;
 import com.cris.mapsPeliculas.negocio.Netflix;
@@ -36,8 +38,8 @@ public class Start {
 		baseDatosPeliculas.addPelicula(et);
 		baseDatosPeliculas.addPelicula(tiburon);
 		
-		
-		PeliculasConsola.imprimir(baseDatosPeliculas.getPeliculas());
+		baseDatosPeliculas.getPeliculas();
+		//PeliculasConsola.imprimir(listaPeliculas);
 	}
 
 }

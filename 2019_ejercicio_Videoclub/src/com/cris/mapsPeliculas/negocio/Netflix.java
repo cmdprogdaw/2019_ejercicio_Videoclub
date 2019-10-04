@@ -1,15 +1,17 @@
 package com.cris.mapsPeliculas.negocio;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import com.cris.mapsPeliculas.beans.Director;
 import com.cris.mapsPeliculas.beans.Pelicula;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class Netflix {
 
 	
 	private HashMap<String,Pelicula> peliculasTitulo;
-	private HashMap<Director,Pelicula> peliculasDirector;
+	private HashMap<Director,ArrayList<Pelicula>> peliculasDirector;
 	private HashMap<Integer,Pelicula> peliculasAnio;
 	
 	
@@ -18,7 +20,7 @@ public class Netflix {
 	public Netflix() {
 		
 		peliculasTitulo = new HashMap<String,Pelicula>();
-		peliculasDirector = new HashMap<Director,Pelicula>();
+		peliculasDirector = new HashMap<Director,ArrayList<Pelicula>>();
 		peliculasAnio = new HashMap<Integer,Pelicula>();
 	}
 	
@@ -31,8 +33,30 @@ public class Netflix {
 	public void addPelicula(Pelicula pelicula) {
 		
 		peliculasTitulo.put(pelicula.getTitulo(), pelicula);
-		peliculasDirector.put(pelicula.getDirector(), pelicula);
 		peliculasAnio.put(pelicula.getAnio(), pelicula);
+		
+		//peliculasDirector.put(pelicula.getDirector(), pelicula);
+		
+		/*cuando yo pretendo añadir, si la clave con el director ya tiene una entrada 
+		 *tengo que acceder a su lista de peliculas para añadir
+		 *y si no hay nada tengo que crear la lista de peliculas
+		 */
+		
+		if(peliculasDirector.containsKey(pelicula.getDirector())) {
+			//extraer la lista de peliculas
+			ArrayList<Pelicula> lista = peliculasDirector.get(pelicula.getDirector());
+			
+			//añadir la nueva pelicula
+			lista.add(pelicula);
+		}
+		else {
+			//crear una nueva lista de peliculas
+			ArrayList<Pelicula> lista = new ArrayList<Pelicula>();
+			lista.add(pelicula);
+			
+			//colocarla en el HashMap
+			peliculasDirector.put(pelicula.getDirector(), lista);
+		}
 	}
 	
 	
@@ -67,15 +91,23 @@ public class Netflix {
 	 * @param director parametro de busqueda
 	 * @return la Pelicula o null
 	 */
-	public Pelicula getPelicula(Director director) {
+	public void getPeliculas() {
+		/*
+		return peliculasDirector.get(director).iterator();
+		*/
 		
-		return peliculasDirector.get(director);
+		for(Director key : peliculasDirector.keySet()) {
+			
+			List<Pelicula> list = peliculasDirector.get(key);
+			System.out.println(list);
+		}
 	}
 	
 	
-	
+	/*
 	public Iterator<Pelicula> getPeliculas(){
 		
 		return peliculasAnio.values().iterator();
 	}
+	*/
 }
